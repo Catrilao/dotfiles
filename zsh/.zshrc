@@ -23,10 +23,28 @@ eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 # Path
 # -----------------------------------------------------------------------------
-export PATH="$PATH:$HOME/.local/bin"
-export PATH="$PATH:/opt/nvim-linux64/bin"
-export PATH="$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools"
-export PATH="$PATH:$NVM_DIR"
+setopt extended_glob null_glob
+
+path=(
+    $path
+    $HOME/.local/bin
+    /opt/nvim-linux64/bin
+    $DOTNET_ROOT
+    $DOTNET_ROOT/tools
+    $NVM_DIR
+    $HOME/scripts/
+)
+
+typeset -U path
+path=($^path(N-/))
+
+export PATH
+
+
+# Enviromental variables
+# -----------------------------------------------------------------------------
+export VISUAL=nvim
+export EDITOR=nvim
 
 
 # Zinit Configuration
@@ -87,7 +105,7 @@ bindkey '^o' fzf-cd-widget
 
 # Hitory
 # -----------------------------------------------------------------------------
-HISTSIZE=3000
+HISTSIZE=10000
 HISTFILE="$XDG_STATE_HOME/zsh/history/.zsh_history"
 SAVEHIST=$HISTSIZE
 HISTDUP=erase
@@ -95,9 +113,6 @@ setopt appendhistory
 setopt sharehistory
 setopt hist_ignore_space
 setopt hist_ignore_all_dups
-setopt hist_save_no_dups
-setopt hist_ignore_dups
-setopt hist_find_no_dups
 setopt hist_expire_dups_first
 setopt hist_reduce_blanks
 
@@ -112,37 +127,5 @@ export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git/*'"
 
 # Aliases
 # -----------------------------------------------------------------------------
-alias v="nvim"
-alias vz="nvim $ZDOTDIR/.zshrc"
-alias so="source $ZDOTDIR/.zshrc"
-alias c="clear"
-alias cc="clear && code ."
-alias ls="eza --icons --group-directories-first --oneline --no-quotes"
-alias ll="eza --all --icons --group-directories-first --oneline --no-quotes"
-alias tree="eza --tree --no-quotes"
-alias fzf='fzf --preview "bat --style=plain --color=always {}"'
-alias pf="fzf --preview 'bat --style=plain --color=always {}' --bind shift-up:preview-page-up,shift-down:preview-page-down"
-alias bat="bat --style=numbers --color=always"
-alias wget=wget --hsts-file="$XDG_DATA_HOME/wget-hsts"
-alias buu="brew update; brew upgrade"
-alias pbcopy="xclip -selection clipboard"
-alias pbpaste="xclip -selection clipboard -o"
-alias cf="pbcopy < $1"
-alias ..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
-alias .....="cd ../../../.."
-alias -- -="cd -"
-alias sudo="sudo "
-
-function mkd {
-    mkdir -p $1 && cd $1
-}
-
-function copy-line {
-    rg --line-number . | fzf --delimiter ':' --preview 'bat --color=always --highlight-line {2} {1}' | awk -F ':' '{ print $3 }' | sed 's/^[[:space:]]*//' | pbcopy
-}
-
-function open-at-line {
-    v $(rg --line-number . | fzf --delimiter ':' --preview 'bat --color=always --highlight-line {2} {1}' | awk -F ':' '{ print "+"$2" "$1 }')
-}
+source $ZDOTDIR/aliases.zsh
+source $ZDOTDIR/functions.zsh
