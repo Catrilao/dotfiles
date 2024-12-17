@@ -11,7 +11,6 @@ export NPM_CONFIG_INIT_MODULE="$XDG_CONFIG_HOME/npm/config/npm-init.js"
 export NPM_CONFIG_CACHE="$XDG_CACHE_HOME/npm"
 export NPM_CONFIG_TMP="$XDG_RUNTIME_DIR/npm"
 export PYTHON_HISTORY="$XDG_DATA_HOME/python/history"
-export DOTNET_CLI_HOME="$XDG_DATA_HOME/dotnet"
 export DOTNET_ROOT="$XDG_DATA_HOME/dotnet"
 export AZURE_CONFIG_DIR="$XDG_DATA_HOME/azure"
 
@@ -97,7 +96,7 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
 # Keybindings
 # -----------------------------------------------------------------------------
-bindkey -e
+bindkey -v
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
 bindkey '^o' fzf-cd-widget
