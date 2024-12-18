@@ -1,49 +1,21 @@
-# XDG Base directory specification
-# -----------------------------------------------------------------------------
-export XDG_CONFIG_HOME="$HOME/.config"
-export XDG_CACHE_HOME="$HOME/.cache"
-export XDG_DATA_HOME="$HOME/.local/share"
-export XDG_STATE_HOME="$HOME/.local/state"
+export DOTFILES="$HOME/dotfiles"
 
-export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
-export PARALLEL_HOME="$XDG_CONFIG_HOME/parallel"
-export NPM_CONFIG_INIT_MODULE="$XDG_CONFIG_HOME/npm/config/npm-init.js"
-export NPM_CONFIG_CACHE="$XDG_CACHE_HOME/npm"
-export NPM_CONFIG_TMP="$XDG_RUNTIME_DIR/npm"
-export PYTHON_HISTORY="$XDG_DATA_HOME/python/history"
-export DOTNET_ROOT="$XDG_DATA_HOME/dotnet"
-export AZURE_CONFIG_DIR="$XDG_DATA_HOME/azure"
+for file in $DOTFILES/system/*.zsh; do
+    source $file
+done
+
+for file in $DOTFILES/git/*.zsh; do
+    source $file
+done
+
+for file in $DOTFILES/zsh/*.zsh; do
+    source $file
+done
 
 
 # Homebrew
 # -----------------------------------------------------------------------------
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-
-
-# Path
-# -----------------------------------------------------------------------------
-setopt extended_glob null_glob
-
-path=(
-    $path
-    $HOME/.local/bin
-    /opt/nvim-linux64/bin
-    $DOTNET_ROOT
-    $DOTNET_ROOT/tools
-    $NVM_DIR
-    $HOME/scripts/
-)
-
-typeset -U path
-path=($^path(N-/))
-
-export PATH
-
-
-# Enviromental variables
-# -----------------------------------------------------------------------------
-export VISUAL=nvim
-export EDITOR=nvim
 
 
 # Zinit Configuration
@@ -102,29 +74,9 @@ bindkey '^n' history-search-forward
 bindkey '^o' fzf-cd-widget
 
 
-# Hitory
-# -----------------------------------------------------------------------------
-HISTSIZE=10000
-HISTFILE="$XDG_STATE_HOME/zsh/history/.zsh_history"
-SAVEHIST=$HISTSIZE
-HISTDUP=erase
-setopt appendhistory
-setopt sharehistory
-setopt hist_ignore_space
-setopt hist_ignore_all_dups
-setopt hist_expire_dups_first
-setopt hist_reduce_blanks
-
-
 # Shell integrations
 # -----------------------------------------------------------------------------
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
 
 export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git/*'"
-
-
-# Aliases
-# -----------------------------------------------------------------------------
-source $ZDOTDIR/aliases.zsh
-source $ZDOTDIR/functions.zsh
