@@ -35,10 +35,10 @@ eval "$(oh-my-posh init zsh --config $XDG_CONFIG_HOME/ohmyposh/prompt.toml)"
 
 # Plugins
 # -----------------------------------------------------------------------------
-zinit ice lucid silent; zinit light zsh-users/zsh-syntax-highlighting
-zinit ice lucid silent; zinit light zsh-users/zsh-autosuggestions
-zinit ice lucid silent; zinit light zsh-users/zsh-completions
-zinit ice lucid silent; zinit light Aloxaf/fzf-tab
+zinit ice silent; zinit light zsh-users/zsh-autosuggestions
+zinit ice silent wait'1'; zinit light zsh-users/zsh-syntax-highlighting
+zinit ice silent wait'2'; zinit light zsh-users/zsh-completions
+zinit ice silent wait'3'; zinit light Aloxaf/fzf-tab
 
 
 # Snippets
