@@ -1,17 +1,15 @@
 export DOTFILES="$HOME/dotfiles"
 
-for file in $DOTFILES/system/*.zsh; do
-    source $file
-done
+load_dotfiles() {
+    local dir=$1
+    for file in "$dir"/*.zsh; do
+        [ -r "$file" ] && source "$file" || echo "Error loading $file"
+    done
+}
 
-for file in $DOTFILES/git/*.zsh; do
-    source $file
-done
-
-for file in $DOTFILES/zsh/*.zsh; do
-    source $file
-done
-
+load_dotfiles "$DOTFILES/system/"
+load_dotfiles "$DOTFILES/zsh/"
+load_dotfiles "$DOTFILES/git/"
 
 # Homebrew
 # -----------------------------------------------------------------------------
