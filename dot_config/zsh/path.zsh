@@ -3,11 +3,8 @@ setopt extended_glob null_glob
 path=(
     $path
     $HOME/.local/bin
-    /opt/nvim-linux64/bin
-    $DOTNET_ROOT
-    $DOTNET_ROOT/tools
-    $NVM_DIR
-    $HOME/scripts/
+    /nix/store
+    /mnt/c/Windows/System32
 )
 
 typeset -U path

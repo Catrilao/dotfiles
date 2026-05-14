@@ -1,4 +1,5 @@
 HISTSIZE=10000
+mkdir -p "$XDG_STATE_HOME/zsh/history/"
 HISTFILE="$XDG_STATE_HOME/zsh/history/.zsh_history"
 SAVEHIST=$HISTSIZE
 

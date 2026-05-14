@@ -17,3 +17,8 @@ export AZURE_CONFIG_DIR="$XDG_DATA_HOME/azure"
 # Editors
 export VISUAL=nvim
 export EDITOR=nvim
+
+# Nix Package Manager
+if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+  . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+fi
