@@ -76,7 +76,8 @@ nix-env -iA \
 	nixpkgs.ripgrep \
 	nixpkgs.git-delta \
 	nixpkgs.direnv \
-	nixpkgs.oh-my-posh
+	nixpkgs.oh-my-posh \
+	nixpkgs.zellij \
 
 export PATH="$HOME/.local/bin:$PATH"
 

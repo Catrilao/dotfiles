@@ -108,3 +108,9 @@ if [[ ! -s "$EVAL_CACHE_DIR/direnv.zsh" ]]; then
     direnv hook zsh > "$EVAL_CACHE_DIR/direnv.zsh"
 fi
 source "$EVAL_CACHE_DIR/direnv.zsh"
+
+# Zellij
+if [[ -z "$ZELLIJ" ]] && [[ "$VSCODE_IPC_HOOK_CLI" == "" ]]; then
+    # 'attach -c' means attach to default session, or create it if it doesn't exist
+    exec zellij attach -c default
+fi
