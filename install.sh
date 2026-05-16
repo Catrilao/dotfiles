@@ -78,6 +78,7 @@ nix-env -iA \
 	nixpkgs.direnv \
 	nixpkgs.oh-my-posh \
 	nixpkgs.zellij \
+	nixpkgs.tree-sitter
 
 export PATH="$HOME/.local/bin:$PATH"
 
